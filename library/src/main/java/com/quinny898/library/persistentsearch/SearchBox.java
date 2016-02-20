@@ -933,7 +933,6 @@ public class SearchBox extends RelativeLayout {
 			else if (option.imageUrl != null && option.imageUrl.trim().length() > 0) {
 				Picasso.with(convertView.getContext())
 						.load(option.imageUrl)
-						.centerCrop()
 						.into(icon);
 			}
 
