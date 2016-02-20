@@ -42,6 +42,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.balysv.materialmenu.ps.MaterialMenuDrawable.IconState;
 import com.balysv.materialmenu.ps.MaterialMenuView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -880,7 +881,7 @@ public class SearchBox extends RelativeLayout {
 	
 
 	private void search(String text) {
-		SearchResult option = new SearchResult(text, null);
+		SearchResult option = new SearchResult(text, "");
 		search(option, false);
 		
 	}
@@ -926,7 +927,16 @@ public class SearchBox extends RelativeLayout {
 					.findViewById(R.id.title);
 			title.setText(option.title);
 			ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
-			icon.setImageDrawable(option.icon);
+			if (option.icon != null) {
+				icon.setImageDrawable(option.icon);
+			}
+			else if (option.imageUrl != null && option.imageUrl.trim().length() > 0) {
+				Picasso.with(convertView.getContext())
+						.load(option.imageUrl)
+						.centerCrop()
+						.into(icon);
+			}
+
 			ImageView up = (ImageView) convertView.findViewById(R.id.up);
 			up.setOnClickListener(new OnClickListener() {
 
